@@ -89,10 +89,27 @@ return {
     "neovim/nvim-lspconfig",
     ---@class PluginLspOpts
     opts = {
-      ---@type lspconfig.options
+      ---@type lspconfig.options.pyright
       servers = {
         -- pyright will be automatically installed with mason and loaded with lspconfig
         pyright = {},
+      },
+    },
+  },
+
+  -- add ltex to lspconfig
+  {
+    "neovim/nvim-lspconfig",
+    ---@class PluginLspOpts
+    opts = {
+      ---@type lspconfig.options.ltex
+      servers = {
+        settings = {
+          ---@type table<string>
+          ltex = {
+            language = "es",
+          },
+        },
       },
     },
   },
