@@ -104,25 +104,46 @@ map({ "n", "v" }, "<leader>cf", function()
     Util.format({ force = true })
 end, { desc = "Format" })
 
--- stylua: ignore start
-
 -- toggle options
-map("n", "<leader>uf", function() Util.format.toggle() end, { desc = "Toggle auto format (global)" })
-map("n", "<leader>uF", function() Util.format.toggle(true) end, { desc = "Toggle auto format (buffer)" })
-map("n", "<leader>us", function() Util.toggle("spell") end, { desc = "Toggle Spelling" })
-map("n", "<leader>uw", function() Util.toggle("wrap") end, { desc = "Toggle Word Wrap" })
-map("n", "<leader>uL", function() Util.toggle("relativenumber") end, { desc = "Toggle Relative Line Numbers" })
-map("n", "<leader>ul", function() Util.toggle.number() end, { desc = "Toggle Line Numbers" })
-map("n", "<leader>ud", function() Util.toggle.diagnostics() end, { desc = "Toggle Diagnostics" })
+map("n", "<leader>uf", function()
+    Util.format.toggle()
+end, { desc = "Toggle auto format (global)" })
+map("n", "<leader>uF", function()
+    Util.format.toggle(true)
+end, { desc = "Toggle auto format (buffer)" })
+map("n", "<leader>us", function()
+    Util.toggle("spell")
+end, { desc = "Toggle Spelling" })
+map("n", "<leader>uw", function()
+    Util.toggle("wrap")
+end, { desc = "Toggle Word Wrap" })
+map("n", "<leader>uL", function()
+    Util.toggle("relativenumber")
+end, { desc = "Toggle Relative Line Numbers" })
+map("n", "<leader>ul", function()
+    Util.toggle.number()
+end, { desc = "Toggle Line Numbers" })
+map("n", "<leader>ud", function()
+    Util.toggle.diagnostics()
+end, { desc = "Toggle Diagnostics" })
+
 local conceallevel = vim.o.conceallevel > 0 and vim.o.conceallevel or 3
-map("n", "<leader>uc", function() Util.toggle("conceallevel", false, {0, conceallevel}) end, { desc = "Toggle Conceal" })
+map("n", "<leader>uc", function()
+    Util.toggle("conceallevel", false, { 0, conceallevel })
+end, { desc = "Toggle Conceal" })
 if vim.lsp.inlay_hint then
-  map("n", "<leader>uh", function() vim.lsp.inlay_hint(0, nil) end, { desc = "Toggle Inlay Hints" })
+    map("n", "<leader>uh", function()
+        vim.lsp.inlay_hint(0, nil)
+    end, { desc = "Toggle Inlay Hints" })
 end
 
 -- lazygit
-map("n", "<leader>gg", function() Util.terminal({ "lazygit" }, { cwd = Util.root(), esc_esc = false, ctrl_hjkl = false }) end, { desc = "Lazygit (root dir)" })
-map("n", "<leader>gG", function() Util.terminal({ "lazygit" }, {esc_esc = false, ctrl_hjkl = false}) end, { desc = "Lazygit (cwd)" })
+map("n", "<leader>gg", function()
+    Util.terminal({ "lazygit" }, { cwd = Util.root(), esc_esc = false, ctrl_hjkl = false })
+end, { desc = "Lazygit (root dir)" })
+map("n", "<leader>gG", function()
+    Util.terminal({ "lazygit" }, { esc_esc = false, ctrl_hjkl = false })
+end, { desc = "Lazygit (cwd)" })
 
 -- quit
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
@@ -131,12 +152,18 @@ map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
 map("n", "<leader>ui", vim.show_pos, { desc = "Inspect Pos" })
 
 -- LazyVim Changelog
-map("n", "<leader>L", function() Util.news.changelog() end, { desc = "LazyVim Changelog" })
+map("n", "<leader>L", function()
+    Util.news.changelog()
+end, { desc = "LazyVim Changelog" })
 
 -- floating terminal
-local lazyterm = function() Util.terminal(nil, { cwd = Util.root() }) end
+local lazyterm = function()
+    Util.terminal(nil, { cwd = Util.root() })
+end
 map("n", "<leader>ft", lazyterm, { desc = "Terminal (root dir)" })
-map("n", "<leader>fT", function() Util.terminal() end, { desc = "Terminal (cwd)" })
+map("n", "<leader>fT", function()
+    Util.terminal()
+end, { desc = "Terminal (cwd)" })
 map("n", "<c-/>", lazyterm, { desc = "Terminal (root dir)" })
 map("n", "<c-_>", lazyterm, { desc = "which_key_ignore" })
 
@@ -158,53 +185,12 @@ map("n", "<leader>-", "<C-W>s", { desc = "Split window below", remap = true })
 map("n", "<leader>|", "<C-W>v", { desc = "Split window right", remap = true })
 
 -- tabs
-map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
-map("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })
-map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
-map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
-map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
-map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
-
-local discipline = require("craftzdog.discipline")
-discipline.cowboy()
-
-local keymap = vim.keymap
-local opts = { noremap = true, silent = true }
-
--- Increment/decrement
-keymap.set("n", "+", "<C-a>")
-keymap.set("n", "-", "<C-x>")
-
--- Delete a word backwards
-keymap.set("n", "dw", "vb_d")
+map("n", "<tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
+map("n", "<tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })
+map("n", "<tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
+map("n", "<tab>", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+map("n", "<tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
+map("n", "<s-tab>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
 -- Select all
-keymap.set("n", "<C-a>", "gg<S-v>G")
-
--- Jumplist
-keymap.set("n", "<C-m>", "<C-i>", opts)
-
--- New tab
-keymap.set("n", "te", ":tabedit<Return>", opts)
-keymap.set("n", "<tab>", ":tabnext<Return>", opts)
-keymap.set("n", "<s-tab>", ":tabprev<Return>", opts)
-
--- Split window
-keymap.set("n", "ss", ":split<Return>", opts)
-keymap.set("n", "sv", ":vsplit<Return>", opts)
--- Move window
-keymap.set("n", "sh", "<C-w>h")
-keymap.set("n", "sk", "<C-w>k")
-keymap.set("n", "sj", "<C-w>j")
-keymap.set("n", "sl", "<C-w>l")
-
--- Resize window
-keymap.set("n", "<C-w><letf>", "<C-w><")
-keymap.set("n", "<C-w><right>", "<C-w>>")
-keymap.set("n", "<C-w><up>", "<C-w>+")
-keymap.set("n", "<C-w><down>", "<C-w>-")
-
--- Diagnostics
-keymap.set("n", "<C-;>", function()
-  vim.diagnostics.goto_next()
-end, opts)
+map("n", "ga", "ggVG", { desc = "Select all" })
