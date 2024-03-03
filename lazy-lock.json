@@ -76,4 +76,3 @@
   "vimtex": { "branch": "master", "commit": "a397999be98e99482348e7108baa795c244a0f15" },
   "which-key.nvim": { "branch": "main", "commit": "4433e5ec9a507e5097571ed55c02ea9658fb268a" },
   "window-picker": { "branch": "main", "commit": "41cfaa428577c53552200a404ae9b3a0b5719706" }
-}
